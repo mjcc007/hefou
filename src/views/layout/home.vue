@@ -1,9 +1,13 @@
 <template>
-  <div class="header_wrapper">
+  <div>
+    <div class="header_wrapper">
+      <div class="headershow">
+
+      </div>
 			<header>
 				<div class="container">
 					<div id="logo">
-					  <a href="index.html"><img src="../assets/images/logo.jpg" alt="网站首页"></a>
+					  <a href="index.html"><img src="../../assets/images/logo.jpg" alt="网站首页"></a>
 					</div>
 					<div id="contain1">
 						<div id="child_nav">
@@ -13,7 +17,7 @@
               </ul>
 						</div>
 						<div id="search">
-							<el-input placeholder="请输入内容" v-model="input5" >
+							<el-input placeholder="请输入内容" v-model="headerSearch" >
                 <el-button slot="append" icon="el-icon-search"></el-button>
               </el-input>
 						</div>
@@ -23,7 +27,7 @@
                 <el-dropdown-menu slot="dropdown" divided="false">
                   <el-dropdown-item divided @click.native="logout">帮助</el-dropdown-item>
                   <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
-                   <el-dropdown-item divided @click.native="logout">哈哈哈哈</el-dropdown-item>
+                  <el-dropdown-item divided @click.native="logout">哈哈哈哈</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -32,42 +36,67 @@
 				<div class="container" id="nav">
 					<nav>
 						<ul>
-              <li><a href="index.html">首页</a></li>
-							<li><a href="index.html">故事</a></li>
-							<li><a href="index.html">音乐</a></li>
-							<li><a href="index.html">漫画</a></li>
-							<li><a href="index.html">点子</a></li>
-							<li><a href="index.html">视频</a></li>
+              <li><router-link to="/home/homepage">首页</router-link></li>
+							<li><router-link to="/home/story">故事</router-link></li>
+							<li><router-link to="/home">音乐</router-link></li>
+							<li><router-link to="/home">漫画</router-link></li>
+							<li><router-link to="/home">点子</router-link></li>
+							<li><router-link to="/home">视频</router-link></li>
 						</ul>
 					</nav>
 				</div>
 		  </header>
+    </div>
+    <div class="appmainsecction">
+      <app-main></app-main>
+    </div>
+    <div class="footer_wrapper">
+
+    </div>
 	</div>
 </template>
 
 <script>
-import HeaderNav from '../components/HeaderNav.vue'
+import AppMain from '../mainsection/appmain.vue'
 export default {
   components: {
-    HeaderNav
+    AppMain
   },
   data() {
     return {
       sysUserName: '张晓',
 			sysUserAvatar: '',
+      headerSearch: ''
     }
   },
   mounted () {
-    this.sysUserAvatar = require('../assets/user.png');
+    this.sysUserAvatar = require('../../assets/user.png');
   }
 }
 </script>
 
 <style scoped>
 .container{
-	width: 1000px;
+	width: 1100px;
 	margin: 0 auto;
 }
+.headershow{
+  width: 100%;
+  height: 50px;
+  background-color:#000;
+  opacity: 1;
+
+}
+/* .header_wrapper{
+  width:100%;
+  height: 188px;
+  margin: 0;
+  padding: 0;
+} */
+.header_wrapper{
+  background-image: url(../../assets/images/headerbg.svg);
+}
+
 div#logo{
 	display:inline-block;
 	width: 460px;
@@ -133,7 +162,8 @@ input[type="submit"]{
 	padding: 0 10px;
 }
 div#nav{
-	background: #b8dcd2;
+  background: #b8dcd2;/*aqua;*/
+  opacity: 0.95;
 	height: 50px;
   /* border:1px solid; */
   border-radius:25px;
@@ -142,9 +172,17 @@ div#nav li{
 	display: inline-block;
 	line-height: 50px;
 	padding:0 40px;
-
 }
-div#nav a{
+
+div#nav li:nth-child(2n-1):hover{
+  background-color:lime
+}
+
+div#nav li:nth-child(2n):hover{
+  background-color:darkorange
+}
+
+div#nav router-link{
 	color: #fff;
 	text-decoration: none;
 	font-size: 16px;
